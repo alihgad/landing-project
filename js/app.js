@@ -25,10 +25,22 @@
 
 
 const sections = document.querySelectorAll("section");
-for (let i =0 ;i<sections.length;i++){
-sections[i].setAttribute("class","");
-console.log(sections[i])
+for (let i = 0; i < sections.length; i++) {
+    sections[i].setAttribute("class", "");
 }
+
+const firstPos = sections[0].getBoundingClientRect().top;
+const secPos = sections[1].getBoundingClientRect().top;
+const thirdPos = sections[2].getBoundingClientRect().top;
+const fourthPos = sections[3].getBoundingClientRect().top;
+console.log(firstPos["y"]);
+
+const firstSection = document.getElementById("section1");
+const secSection = document.getElementById("section2");
+const thirdSection = document.getElementById("section3");
+const fourthSection = document.getElementById("section4");
+
+
 
 const ul = document.querySelector(".navbar__menu");
 /**
@@ -37,44 +49,45 @@ const ul = document.querySelector(".navbar__menu");
  * 
 */
 
-function craeteList(){ 
+function craeteList() {
 
-//create freg DOM
-const freg = document.createDocumentFragment() ;
-sections.forEach(function(section){
-//create li + a
-    const  li = document.createElement("li");
-    let a = document.createElement("a");
-// add text and href and class to change style  
-    a.innerText = `section ${section.innerText[8]}`
-    a.setAttribute("href",`#section${section.innerText[8]}`)
-    a.setAttribute("class","menu__link");
-//append it to freg dom
-    li.appendChild(a);
-    freg.appendChild(li);
-})
-//append freg dom to list 
-ul.appendChild(freg)
+    //create freg DOM
+    const freg = document.createDocumentFragment();
+    sections.forEach(function (section) {
+        //create li + a
+        const li = document.createElement("li");
+        let a = document.createElement("a");
+        // add text and href and class to change style  
+        a.innerText = `section ${section.innerText[8]}`
+        a.setAttribute("href", `#section${section.innerText[8]}`)
+        a.setAttribute("class", "menu__link");
+        //append it to freg dom
+        li.appendChild(a);
+        freg.appendChild(li);
+    })
+    //append freg dom to list 
+    ul.appendChild(freg)
 };
 
-function sectionApperd (elem) {
-let sectionPos = elem.getBoundingClientRect();
-return (sectionPos.top >= 0);
-}
-    // Gives the section being viewed a different appearance
-function chickActiv() {
-    for (section of sections) {
-    // If the section is in the viewport
-    if (sectionApperd(section)) {
-    // Check if it doesn't already contain "your-active-class"
-        if (!section.classList.contains('your-active-class')) {
-    // Then add it
-        section.classList.add ("your-active-class");
-            }else{
-      // If it's out the viewport then remove "your-active-class"
-        section.classList.remove("your-active-class");}    
+function addActiv() {
+    if ( firstPos["y"] === 0 ) {
+            firstSection.calssList.add('your-active-class');
+            console.log("active add to first");
+        
+    } else if (secPos["y"] === 0 ) {
+            secSection.calssList.add('your-active-class');
+            console.log("active add to sec");
+        
+    } else if (thirdPos["y"] === 0) {
+            thirdSection.calssList.add('your-active-class');
+            console.log("active add to third");
+        
+    } else if (fourthPos["y"] === 0 ) {
+            fourthSection.calssList.add('your-active-class');
+            console.log("active add to fourth");
+        
     }
-}
+
 }
 
 /**
@@ -86,20 +99,38 @@ function chickActiv() {
 // build the nav
 craeteList();
 
+
 // Add class 'active' to section when near top of viewport// Scroll to anchor ID using scrollTO event
-document.addEventListener("scroll",chickActiv)
+
 
 /**
  * End Main Functions
  * Begin Events
- * 
+ *
 */
+window.addEventListener("scroll",function(){
+    // console.log(this.window.innerHeight);
+    console.log(sections[0].getBoundingClientRect().top)
+    for (let i = 0 ; i< sections.length ; i++){
+    if (sections[i].getBoundingClientRect().top < this.window.innerHeight){
+        document.getElementById(`section${i+1}`).classList.add("your-active-class");
+    } }
+    for (let i = 0; i < sections.length; i++) {
+        if (sections[i].getBoundingClientRect().bottom < this.window.innerHeight) {
+            document.getElementById(`section${i + 1}`).classList.remove("your-active-class");
+        }
+    }
+});
 
-// Build menu 
+
+// Build menu
 
 // Scroll to section on link click
 
 // Set sections as active
+function printPos () {
+    console.log(scrollY)
+} 
 
 
 
