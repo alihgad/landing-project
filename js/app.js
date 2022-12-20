@@ -70,10 +70,9 @@ function chickActiv() {
         if (!section.classList.contains('your-active-class')) {
     // Then add it
         section.classList.add ("your-active-class");
-        } else { // If it's out the viewport then remove "your-active-class"
-        section.classList.remove("your-active-class");
-        
-    }    
+            }else{
+      // If it's out the viewport then remove "your-active-class"
+        section.classList.remove("your-active-class");}    
     }
 }
 }
