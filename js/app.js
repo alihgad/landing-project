@@ -23,31 +23,16 @@
  * 
 */
 
-
+// select sections from html by element
 const sections = document.querySelectorAll("section");
-for (let i = 0; i < sections.length; i++) {
-    sections[i].setAttribute("class", "");
-}
-
-const firstPos = sections[0].getBoundingClientRect().top;
-const secPos = sections[1].getBoundingClientRect().top;
-const thirdPos = sections[2].getBoundingClientRect().top;
-const fourthPos = sections[3].getBoundingClientRect().top;
-console.log(firstPos["y"]);
-
-const firstSection = document.getElementById("section1");
-const secSection = document.getElementById("section2");
-const thirdSection = document.getElementById("section3");
-const fourthSection = document.getElementById("section4");
-
-
-
 const ul = document.querySelector(".navbar__menu");
 /**
  * End Global Variables
  * Start Helper Functions
  * 
 */
+
+
 
 function craeteList() {
 
@@ -68,28 +53,21 @@ function craeteList() {
     //append freg dom to list 
     ul.appendChild(freg)
 };
-
-function addActiv() {
-    if ( firstPos["y"] === 0 ) {
-            firstSection.calssList.add('your-active-class');
-            console.log("active add to first");
-        
-    } else if (secPos["y"] === 0 ) {
-            secSection.calssList.add('your-active-class');
-            console.log("active add to sec");
-        
-    } else if (thirdPos["y"] === 0) {
-            thirdSection.calssList.add('your-active-class');
-            console.log("active add to third");
-        
-    } else if (fourthPos["y"] === 0 ) {
-            fourthSection.calssList.add('your-active-class');
-            console.log("active add to fourth");
-        
+function activ() {
+    for (let i = 0; i < sections.length; i++) {
+        // add the class when section be in view port
+        if (sections[i].getBoundingClientRect().bottom < window.innerHeight) {
+            document.getElementById(`section${i + 1}`).classList.add("your-active-class");
+        }
     }
 
+    for (let i = 0; i < sections.length; i++) {
+        // remove the class when section be out view port
+        if (sections[i].getBoundingClientRect().bottom <= 0 ) {
+            document.getElementById(`section${i + 1}`).classList.remove("your-active-class");
+        }
+    }
 }
-
 /**
  * End Helper Functions
  * Begin Main Functions
@@ -108,19 +86,8 @@ craeteList();
  * Begin Events
  *
 */
-window.addEventListener("scroll",function(){
-    // console.log(this.window.innerHeight);
-    console.log(sections[0].getBoundingClientRect().top)
-    for (let i = 0 ; i< sections.length ; i++){
-    if (sections[i].getBoundingClientRect().top < this.window.innerHeight){
-        document.getElementById(`section${i+1}`).classList.add("your-active-class");
-    } }
-    for (let i = 0; i < sections.length; i++) {
-        if (sections[i].getBoundingClientRect().bottom < this.window.innerHeight) {
-            document.getElementById(`section${i + 1}`).classList.remove("your-active-class");
-        }
-    }
-});
+window.addEventListener("scroll",activ)
+
 
 
 // Build menu
@@ -128,9 +95,7 @@ window.addEventListener("scroll",function(){
 // Scroll to section on link click
 
 // Set sections as active
-function printPos () {
-    console.log(scrollY)
-} 
+
 
 
 
