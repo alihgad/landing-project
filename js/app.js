@@ -26,6 +26,7 @@
 // select sections from html by element
 const sections = document.querySelectorAll("section");
 const ul = document.querySelector(".navbar__menu");
+
 /**
  * End Global Variables
  * Start Helper Functions
@@ -35,7 +36,7 @@ const ul = document.querySelector(".navbar__menu");
 
 
 function craeteList() {
-
+    
     //create freg DOM
     const freg = document.createDocumentFragment();
     sections.forEach(function (section) {
@@ -44,15 +45,17 @@ function craeteList() {
         let a = document.createElement("a");
         // add text and href and class to change style  
         a.innerText = `section ${section.innerText[8]}`
-        a.setAttribute("href", `#section${section.innerText[8]}`)
+        // a.setAttribute("href", `#section${section.innerText[8]}`)
         a.setAttribute("class", "menu__link");
         //append it to freg dom
         li.appendChild(a);
         freg.appendChild(li);
+        li.setAttribute("class","link");
     })
     //append freg dom to list 
     ul.appendChild(freg)
 };
+
 function activ() {
     for (let i = 0; i < sections.length; i++) {
         // add the class when section be in view port
@@ -67,7 +70,27 @@ function activ() {
             document.getElementById(`section${i + 1}`).classList.remove("your-active-class");
         }
     }
-}
+};
+function scroll1() {
+    sections[0].scrollIntoView({
+        behavior: 'smooth'
+    })
+};
+function scroll2() {
+    sections[1].scrollIntoView({
+        behavior: 'smooth'
+    })
+};
+function scroll3() {
+    sections[2].scrollIntoView({
+        behavior: 'smooth'
+    })
+};
+function scroll4() {
+    sections[3].scrollIntoView({
+        behavior: 'smooth'
+    })
+};
 /**
  * End Helper Functions
  * Begin Main Functions
@@ -86,7 +109,7 @@ craeteList();
  * Begin Events
  *
 */
-window.addEventListener("scroll",activ)
+window.addEventListener("scroll",activ);
 
 
 
@@ -95,14 +118,11 @@ window.addEventListener("scroll",activ)
 // Scroll to section on link click
 
 // Set sections as active
+const li = document.querySelectorAll('.link');
 
 
-
-
-
-
-
-
-
-
+li[0].addEventListener("click", scroll1);
+li[1].addEventListener("click", scroll2);
+li[2].addEventListener("click", scroll3);
+li[3].addEventListener("click", scroll4);
 
