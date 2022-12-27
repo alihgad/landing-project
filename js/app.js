@@ -62,21 +62,23 @@ function craeteList() {
 function activ() {
     for (let i = 0; i < sections.length; i++) {
         // add the class when section be in view port
-        if (sections[i].getBoundingClientRect().bottom < window.innerHeight) {
+        if (sections[i].getBoundingClientRect().bottom < window.innerHeight   && sections[i].getBoundingClientRect().top > 0) {
             document.getElementById(`section${i + 1}`).classList.add("your-active-class");
         }
     }
 
     for (let i = 0; i < sections.length; i++) {
         // remove the class when section be out view port
-        if (sections[i].getBoundingClientRect().bottom <= 0 ) {
+        if (sections[i].getBoundingClientRect().bottom <= window.innerHeight * 0.25   || sections[i].getBoundingClientRect().top > window.innerHeight * 0.70 ) {
             document.getElementById(`section${i + 1}`).classList.remove("your-active-class");
         }
     }
 };
 
-
-
+const vp = window.innerHeight
+console.log(vp);
+const hvp = 0.5*vp;
+console.log(hvp);
 
 
 
