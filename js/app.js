@@ -68,46 +68,20 @@ function craeteList() {
 function activ() {
     for (let i = 0; i < sections.length; i++) {
         // add the class when section be in view port
-        if (sections[i].getBoundingClientRect().bottom < window.innerHeight   && sections[i].getBoundingClientRect().top > 0) {
+        if (sections[i].getBoundingClientRect().top < 300) {
             document.getElementById(`section${i + 1}`).classList.add("your-active-class");
-        }
-    }
-    
-    for (let i = 0; i < sections.length; i++) {
-        // remove the class when section be out view port
-        if (sections[i].getBoundingClientRect().bottom <= window.innerHeight * 0.25   || sections[i].getBoundingClientRect().top > window.innerHeight * 0.70 ) {
+        } else {
             document.getElementById(`section${i + 1}`).classList.remove("your-active-class");
         }
     }
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /**
  * End Helper Functions
  * Begin Main Functions
  * 
 */
-
 // build the nav
 craeteList();
-
-
-// Add class 'active' to section when near top of viewport// Scroll to anchor ID using scrollTO event
-
-
 /**
  * End Main Functions
  * Begin Events
@@ -115,9 +89,6 @@ craeteList();
 */
 // make the event to add active class while scrolling
 window.addEventListener("scroll",activ);
-
-
-
 // Build menu
 
 // Scroll to section on link click
@@ -134,10 +105,3 @@ for (let i =0;i<sections.length;i++){
         })
     });
 }
-
-
-
-
-
-
-
